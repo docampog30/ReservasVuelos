@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.6
+version = '1.0'
+jar {
+    manifest {
+	attributes ('Main-Class': 'co.com.reservas.main.MainCore', 'Implementation-Version': version)
+    }
+}
+
+repositories { mavenCentral() }
+
+dependencies {
+    compile(
+	    'org.eclipse.jetty:jetty-server:9.3.0.M1',
+	    'org.eclipse.jetty:jetty-servlet:9.3.0.M1',
+	    
+	    'org.hibernate:hibernate-entitymanager:4.3.7.Final',
+	    'org.hibernate:hibernate-c3p0:4.3.7.Final',
+	    'org.hibernate:hibernate-ehcache:4.3.7.Final',
+	    'org.glassfish.jersey.core:jersey-server:2.14',
+	    'org.glassfish.jersey.containers:jersey-container-servlet:2.14',
+	    'org.glassfish.jersey.media:jersey-media-json-jackson:2.14',
+	    'javax.xml.bind:jaxb-api:2.2.12',
+	    'org.glassfish.jersey.containers.glassfish:jersey-gf-cdi:2.14',
+	    'org.jboss.weld.se:weld-se:2.2.8.Final',
+	    'org.jboss.weld.servlet:weld-servlet-core:2.2.8.Final',
+	    'javax.servlet.jsp:jsp-api:2.2',
+	    'org.jboss:jandex:1.2.2.Final'
+	    )
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+test { systemProperties 'property': 'value' }
+
+uploadArchives {
+    repositories { flatDir { dirs 'repos'
+	} }
+}
